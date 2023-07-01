@@ -46,15 +46,21 @@ Antes de iniciar :checkered_flag:, você precisa ter [Git](https://git-scm.com),
 
 ## :checkered_flag: Criar container no docker ##
 
-Tenha Docker instalado na maquina, se não tiver instale neste link https://www.docker.com/
+<div>
+Tenha Docker instalado na maquina, se não tiver instale neste link https://www.docker.com/<br/>
 Após baixado e instalado, rodar o comando abaixo
+</div>
 
 ```bash
 $ docker run --name stations -e POSTGRES_PASSWORD=123456 -e POSTGRES_DB=stations -p 5432:5432 -d postgres
-
 ```
+
+<div>
 Este comando irá criar um container com banco de dados postgres
+<br/>
 Com container criado e gerenciado de dados instalado, so configurar e rodar a aplicação.
+</div>
+
 ## :checkered_flag: Inicialização ##
 
 ```bash
