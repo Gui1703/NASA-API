@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String
+  recharges       Recharges[] 
+  reservations    Reservations[]
+}
+
+model Planets {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  mass        Float
+  hasStation  Boolean  @default(false)
+  stations    Stations[]
+}
+
+model Stations {
+  id              Int      @id @default(autoincrement())
+  name            String   @unique
+  planet          String
+  SuitablePlanet  Planets  @relation(fields: [planetId], references: [id])
+  planetId        Int
+  recharges       Recharges[] 
+  reservations    Reservations[]
+}
+
+model Recharges {
+  id         Int       @id @default(autoincrement())
+  start      DateTime  @default(now())
+  end        DateTime
+  station    Stations  @relation(fields: [stationId], references: [id])
+  stationId  Int    
+  user       User  @relation(fields: [userId], references: [id])
+  userId     Int    
+}
+
+model Reservations {
+  id         Int       @id @default(autoincrement())
+  start      DateTime  
+  end        DateTime
+  station    Stations  @relation(fields: [stationId], references: [id])
+  stationId  Int    
+  user       User  @relation(fields: [userId], references: [id])
+  userId     Int   
+}
