@@ -44,7 +44,7 @@ const resolvers = {
       await validateTokenAndReturnUserId(context.token);
 
       const station = await stationsDataBase.findByName(stationName);
-      if (!station) throw error.notFound("Not foud station with this name");
+      if (!station) throw error.notFound("Not found station with this name");
 
       const recharges = await rechargeDataBase.getAllByStationId(station.id);
 
